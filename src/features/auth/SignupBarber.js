@@ -113,7 +113,7 @@ function SignupBarber() {
               Signup as barber
             </button>
           </div>
-    
+          <p className="text-orange-600">{ formErrors.alreadyExists }</p>
           <p>
             Already have an account ?<span> </span>
             <Link

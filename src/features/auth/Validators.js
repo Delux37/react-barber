@@ -1,4 +1,4 @@
-import { loginUser } from '../../db/users';
+import * as DbActions from '../../db/users';
 
 const validateEmail = (email) => {
     const emailRegex = /\S+@\S+\.\S+/;
@@ -30,7 +30,7 @@ export const Validators = {
             errors.password = "Minimum lenght of password is 8"
         }
         
-        if(!loginUser(values)) {
+        if(!DbActions.loginUser(values)) {
             errors.wrongEmailOrPassword = "Wrong email or password"
         }
 
@@ -58,6 +58,11 @@ export const Validators = {
 
         if(values.password.length >= 8 && values.password !== values.cpassword) {
             errors.cpassword = "Passwords doesn't match";
+        }
+        
+
+        if(!DbActions.registerClient(values)) {
+            errors.alreadyExists = "User with current email already exists"
         }
 
         return errors;
@@ -92,6 +97,10 @@ export const Validators = {
 
         if(values.price && !validatePrice(values.price)) {
             errors.price = "Invalid price, make sure to use digits only"
+        }
+        
+        if(!DbActions.registerBarber(values)) {
+            errors.alreadyExists = "Barber with current email already exists"
         }
        
         return errors;

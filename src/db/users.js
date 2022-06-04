@@ -15,19 +15,39 @@ const clientUsers = [
     }
 ]
 
-export const addClientUsers = (newUser) => {
-    if(newUser.email && newUser.password) {
-        const { email, password } = newUser;
+export const registerBarber = (newUser) => {
+    const { firstName, lastName, email, address, price } = newUser;
+    const authentificatedUser = clientUsers.find(o => o.email === email);
 
+    if(!authentificatedUser && firstName && lastName && address && price && email) {
+        barberUsers.push({
+            firstName,
+            lastName,
+            email,
+            address,
+            price
+        })
+        
+        return true;
+    }
+
+    return false;
+}
+
+export const registerClient = (newUser) => {
+    const { email, password } = newUser;
+    const authentificatedUser = clientUsers.find(o => o.email === email);
+
+    if(!authentificatedUser && email && password) {
         clientUsers.push({
             email,
             password,
         })
         
-        return;
-    };
+        return true;
+    }
 
-    throw new Error('Wrong user passed');
+    return false;
 }
 
 export const loginUser = (user) => {
@@ -41,4 +61,3 @@ export const loginUser = (user) => {
 
     return false;
 }
-
