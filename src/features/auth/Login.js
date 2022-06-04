@@ -22,9 +22,11 @@ function Login({addActiveUser}) {
 
     useEffect(() => {
         if(Object.keys(formErrors).length === 0 && isSubmit) {
-            setIsSubmit(false);
-            addActiveUser(formValues);
-            setFormValues(initialValues);
+            if(!formErrors.wrongEmailOrPassword) {
+                setIsSubmit(false);
+                addActiveUser(formValues);
+                setFormValues(initialValues);
+            }
         }
     }, [formErrors])
     
@@ -62,7 +64,7 @@ function Login({addActiveUser}) {
                         Login
                     </button>
                 </div>
-
+                <p className="text-orange-600">{ formErrors.wrongEmailOrPassword }</p>
                 <p>Don't have an account ? <Link to='/auth/signup' className="underline decoration-sky-500 text-cyan-500 hover:cursor-pointer">click here</ Link></p>
             </form>
         </AuthWrapper>

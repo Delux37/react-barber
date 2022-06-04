@@ -11,6 +11,34 @@ const barberUsers = [
 const clientUsers = [
     {
         email: 'john.doe@test.com',
-        password: '123'
+        password: '12345678'
     }
 ]
+
+export const addClientUsers = (newUser) => {
+    if(newUser.email && newUser.password) {
+        const { email, password } = newUser;
+
+        clientUsers.push({
+            email,
+            password,
+        })
+        
+        return;
+    };
+
+    throw new Error('Wrong user passed');
+}
+
+export const loginUser = (user) => {
+    const { email, password } = user;
+
+    const authentificatedUser = clientUsers.find(o => o.email === email && o.password === password);
+
+    if(authentificatedUser) {
+        return { ...authentificatedUser }
+    }
+
+    return false;
+}
+

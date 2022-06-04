@@ -1,3 +1,4 @@
+import { loginUser } from '../../db/users';
 
 const validateEmail = (email) => {
     const emailRegex = /\S+@\S+\.\S+/;
@@ -27,6 +28,10 @@ export const Validators = {
 
         if(values.password && values.password.length < 8) {
             errors.password = "Minimum lenght of password is 8"
+        }
+        
+        if(!loginUser(values)) {
+            errors.wrongEmailOrPassword = "Wrong email or password"
         }
 
         return errors;
@@ -88,7 +93,7 @@ export const Validators = {
         if(values.price && !validatePrice(values.price)) {
             errors.price = "Invalid price, make sure to use digits only"
         }
-        
+       
         return errors;
     }
 }
