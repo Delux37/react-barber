@@ -6,6 +6,7 @@ function AuthWrapper({ children }) {
               absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2
               border border-gray-300 rounded
               shadow-xl p-10
+              bg-white
               '
               >
             {children}
