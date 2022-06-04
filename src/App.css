@@ -1,0 +1,7 @@
+.containerCustom {
+    background-image: url('./styles/images/barbershop.jpg');
+    background-size: cover;
+    object-fit: contain;
+    background-position: center;
+    height: 100vh;
+}
