@@ -1,6 +1,7 @@
+import Login from "./features/auth/Login";
 
 function App() {
-  return <div></div>
+  return <Login />
 }
 
 export default App;
