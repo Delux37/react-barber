@@ -1,6 +1,7 @@
 import AuthWrapper from "./AuthWrapper";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Validators } from './Validators';
 
 function Login({addActiveUser}) {
     const initialValues = { email: "", password: "" };
@@ -15,7 +16,7 @@ function Login({addActiveUser}) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setFormErrors(validate(formValues));
+        setFormErrors(Validators.validateLogin(formValues));
         setIsSubmit(true);
     }
 
@@ -26,30 +27,7 @@ function Login({addActiveUser}) {
             setFormValues(initialValues);
         }
     }, [formErrors])
-
-    const validate = (values) => {
-        const errors = { };
-        const emailRegex = /\S+@\S+\.\S+/;
-
-        if(!values.email) {
-            errors.email = "Email is required";
-        }  
-
-        if(values.email && !emailRegex.test(values.email)) {
-            errors.email = "Wrong format of email (example@gmail.com)"
-        }
-
-        if(!values.password) {
-            errors.password = "Password is required"
-        }
-
-        if(values.password && values.password.length < 8) {
-            errors.password = "Minimum lenght of password is 8"
-        }
-
-        return errors;
-    }
-
+    
     return (
         <AuthWrapper>
             <form onSubmit={handleSubmit} className="space-y-6">
