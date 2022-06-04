@@ -4,6 +4,11 @@ const validateEmail = (email) => {
     return emailRegex.test(email)
 }
 
+const validatePrice = (price) => {
+    const priceREgex = /^[0-9]*$/;
+    return priceREgex.test(price);
+}
+
 export const Validators = {
     validateLogin: (values) => {
         const errors = { };
@@ -50,6 +55,40 @@ export const Validators = {
             errors.cpassword = "Passwords doesn't match";
         }
 
+        return errors;
+    },
+
+    validateBarberSignup: (values) => {
+        const errors = { };
+
+        if(!values.email) {
+            errors.email = "Email is required";
+        }  
+
+        if(values.email && !validateEmail(values.email)) {
+            errors.email = "Wrong format of email (example@gmail.com)"
+        }
+
+        if(!values.firstName) {
+            errors.firstName = "Firstname is required"
+        }
+
+        if(!values.lastName) {
+            errors.lastName = "Lastname is required"
+        }
+
+        if(!values.address) {
+            errors.address = "Address is required"
+        }
+
+        if(!values.price) {
+            errors.price = "Price is required"
+        }
+
+        if(values.price && !validatePrice(values.price)) {
+            errors.price = "Invalid price, make sure to use digits only"
+        }
+        
         return errors;
     }
 }

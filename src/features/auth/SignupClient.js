@@ -33,6 +33,16 @@ function SignupClient({addActiveUser}) {
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
           <h1 className="underline decoration-sky-500">Signup as client</h1>
+          <h2 >Wanna be barber? 
+            <span> </span>
+            <Link
+                to="/auth/signup-barber"
+                className="underline decoration-sky-500 text-cyan-500 hover:cursor-pointer"
+            >
+                signup
+            </Link>
+            <span> </span>
+            as barber</h2>
         </div>
         <div>
           <label htmlFor="" className="txt-sm font-bold text-gray-600 block">

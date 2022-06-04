@@ -1,5 +1,7 @@
 import Login from "./features/auth/Login";
 import SignupClient from "./features/auth/SignupClient";
+import SignupBarber from "./features/auth/SignupBarber";
+
 import { useState } from "react";
 import {
   BrowserRouter,
@@ -22,8 +24,9 @@ function App() {
     <BrowserRouter>
         <div className="containerCustom">
           <Routes>
-              <Route path="auth/login" addActiveUser={addActiveUser} element={<Login  addActiveUser={addActiveUser}/>} />
-              <Route path="auth/signup" addActiveUser={addActiveUser} element={<SignupClient addActiveUser={addActiveUser}/>} />
+              <Route path="auth/login" element={<Login  addActiveUser={addActiveUser}/>} />
+              <Route path="auth/signup" element={<SignupClient addActiveUser={addActiveUser}/>} />
+              <Route path="auth/signup-barber" element={<SignupBarber />} />
           </Routes>
         </div>
     </BrowserRouter>
