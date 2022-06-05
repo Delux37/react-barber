@@ -1,9 +1,16 @@
 import logo from "../../styles/images/barber-icon.png";
+import { useNavigate } from "react-router-dom";
 
 function Toolbar({ email }) {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+      navigate('/dashboard', { replace: true })
+  }
+
   return (
     <nav className="flex items-center justify-between flex-wrap bg-teal-500 p-6">
-      <div className="flex items-center flex-shrink-0 text-white mr-6">
+      <div className="flex items-center flex-shrink-0 text-white mr-6 hover:cursor-pointer" onClick={handleClick}>
         <img src={logo} alt="test" width="54" />
         <span className="ml-5 font-semibold text-xl tracking-tight">
           Deluxe barber

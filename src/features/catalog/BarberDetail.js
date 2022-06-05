@@ -59,7 +59,7 @@ function BarberDetail() {
   return (
     <div className="flex flex-col h-screen w-screen	overflow-y-scroll  bg-catalog-bground">
       <Toolbar email="mymail@gmail.com" />
-      <div className="flex gap-20 p-5 flex-center items-start bg-white mx-auto my-10 rounded">
+      <div className="flex gap-20 p-5 flex-center items-start bg-white mx-auto my-10 rounded max-w-4xl">
         <div className="w-auto w-fit txt-sm font-bold text-gray-600 block">
           <p>Here you can view {barber.firstName}'s detail</p>
 
@@ -72,10 +72,16 @@ function BarberDetail() {
           </button>
           <ul>
             Reviews:
-            <li>
-              <p>DUMMY TEXT</p>
-              <p>STAR 5/10</p>
-            </li>
+            {
+                !barber.userRates?.length 
+                ? <p>This barber has no reviews yet</p>
+                : barber.userRates?.map(
+                    ({id, rate, description}) => <li key={id}>
+                                <p><span className="text-amber-500">Rate:</span> {rate}/5</p>
+                                <p>{description}</p>
+                            </li>
+                )
+            }
           </ul>
         </div>
         <form onSubmit={handleSubmit}>
