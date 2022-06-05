@@ -34,7 +34,7 @@ function App() {
               }></Route>
               <Route path="dashboard/:id" element={
                 <AuthorizedRoutes user={activeUser}>
-                  <BarberDetail />
+                  <BarberDetail email={activeUser.email} />
                 </AuthorizedRoutes>
               }></Route>
               <Route path="auth/login" element={

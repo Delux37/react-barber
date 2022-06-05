@@ -20,10 +20,13 @@ const barberUsers = [
 const clientUsers = [
     {
         email: 'john.doe@test.com',
-        password: '12345678'
+        password: '12345678',
+        orderedBarberIds: [],
     }
 ]
 
+
+/* Client actions */
 export const registerBarber = (newUser) => {
     const { firstName, lastName, email, address, price } = newUser;
     const authentificatedUser = clientUsers.find(o => o.email === email);
@@ -71,6 +74,27 @@ export const loginUser = (user) => {
     return false;
 }
 
+export const userHasSubscribedBarber = (email, barberId) => {
+    const activeUser = clientUsers.find(o => o.email === email);
+
+    if(activeUser) {
+        return activeUser.orderedBarberIds.indexOf(barberId) !== -1;
+    }
+
+    return false;
+}
+
+export const addBarberSubscription = (email, barberId) => {
+    const activeUser = clientUsers.find(o => o.email === email);
+
+    if(activeUser) {
+        activeUser.orderedBarberIds.push(barberId);
+    }
+
+    return false;
+}
+
+/* Barber actions */
 export const fetchBarberDetail = (id) => {
     const barber = barberUsers.find(o => o.id == id)
 
