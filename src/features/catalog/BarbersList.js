@@ -19,7 +19,7 @@ function BarberList() {
   }, []);
 
   return (
-    <ul className="bg-catalog-bground h-full flex gap-20 flex-wrap p-5 items-start">
+    <ul className="bg-catalog-bground h-full flex gap-20 flex-wrap p-5 items-start overflow-y-scroll">
       {!barbers?.length ? (
         <p>Sorry, there is no barber to display</p>
       ) : (
