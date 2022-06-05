@@ -91,7 +91,7 @@ const clientUsers = [
 /* Client actions */
 export const registerBarber = (newUser) => {
     const { firstName, lastName, email, address, price } = newUser;
-    const authentificatedUser = barberUsers.find(o => o.email === email);
+    const authentificatedUser = barberUsers.find(o => o.email == email);
 
     if(!authentificatedUser && firstName && lastName && address && price && email) {
         const uId = Date.now();
@@ -114,7 +114,7 @@ export const registerBarber = (newUser) => {
 
 export const registerClient = (newUser) => {
     const { email, password } = newUser;
-    const authentificatedUser = clientUsers.find(o => o.email === email);
+    const authentificatedUser = clientUsers.find(o => o.email == email);
 
     if(!authentificatedUser && email && password) {
         clientUsers.push({
@@ -132,7 +132,7 @@ export const registerClient = (newUser) => {
 export const loginUser = (user) => {
     const { email, password } = user;
 
-    const authentificatedUser = clientUsers.find(o => o.email === email && o.password === password);
+    const authentificatedUser = clientUsers.find(o => o.email == email && o.password == password);
 
     if(authentificatedUser) {
         return { ...authentificatedUser }
@@ -142,7 +142,7 @@ export const loginUser = (user) => {
 }
 
 export const userHasSubscribedBarber = (email, barberId) => {
-    const activeUser = clientUsers.find(o => o.email === email);
+    const activeUser = clientUsers.find(o => o.email == email);
 
     if(activeUser) {
         return activeUser.orderedBarberIds.indexOf(barberId) !== -1;
@@ -152,7 +152,7 @@ export const userHasSubscribedBarber = (email, barberId) => {
 }
 
 export const addBarberSubscription = (email, barberId) => {
-    const activeUser = clientUsers.find(o => o.email === email);
+    const activeUser = clientUsers.find(o => o.email == email);
 
     if(activeUser) {
         activeUser.orderedBarberIds.push(barberId);
