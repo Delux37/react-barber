@@ -11,6 +11,7 @@ import {
 } from "react-router-dom";
 import './App.css';
 import Dashboard from "./features/Dashboard";
+import BarberDetail from "./features/catalog/BarberDetail";
 
 function App() {
   const [activeUser, setActiveUser] = useState(    {
@@ -24,12 +25,16 @@ function App() {
 
   return (
     <BrowserRouter>
-        
           <Routes>
               <Route path='*' element={<Navigate to="/auth/login"/>} />
               <Route path="dashboard" element={
                 <AuthorizedRoutes user={activeUser}>
                   <Dashboard/>
+                </AuthorizedRoutes>
+              }></Route>
+              <Route path="dashboard/:id" element={
+                <AuthorizedRoutes user={activeUser}>
+                  <BarberDetail />
                 </AuthorizedRoutes>
               }></Route>
               <Route path="auth/login" element={
