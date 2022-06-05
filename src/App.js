@@ -15,11 +15,7 @@ import Dashboard from "./features/Dashboard";
 import BarberDetail from "./features/catalog/BarberDetail";
 
 function App() {
-  // const navigate = useNavigate();
-  const [activeUser, setActiveUser] = useState(    {
-    email: 'john.doe@test.com',
-    password: '12345678'
-});
+  const [activeUser, setActiveUser] = useState(null);
 
   const addActiveUser = (user) => {
     setActiveUser(user);
@@ -27,7 +23,6 @@ function App() {
 
   const handleSignout = () => {
     setActiveUser(null);
-    // navigate("/auth/login");
   }
 
   return (

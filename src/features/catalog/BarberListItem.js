@@ -7,11 +7,13 @@ function BarberListItem({ firstName, lastName, price, userRates }) {
   const handleAverageRate = () => {
      const ratesTotal = userRates.reduce((acc, curr) => acc + +curr.rate, 0);
 
-     setAverageRate((ratesTotal / userRates.length).toFixed(2))
+     const average = userRates.length ? (ratesTotal / userRates.length).toFixed(2) : 0
+
+     setAverageRate(average)
   };
 
   const handleTag = () => {
-    const tag = userRates.length > 0 && userRates.length < 2 
+    const tag = userRates.length >= 0 && userRates.length < 2 
     ? 'junior-barber'
     : userRates.length >= 2 && userRates.length < 5
     ? 'medium-barber'

@@ -30,7 +30,7 @@ export const Validators = {
             errors.password = "Minimum lenght of password is 8"
         }
         
-        if(!DbActions.loginUser(values)) {
+        if(!Object.keys(errors).length && !DbActions.loginUser(values)) {
             errors.wrongEmailOrPassword = "Wrong email or password"
         }
 
@@ -61,7 +61,7 @@ export const Validators = {
         }
         
 
-        if(!DbActions.registerClient(values)) {
+        if(!Object.keys(errors).length && !DbActions.registerClient(values)) {
             errors.alreadyExists = "User with current email already exists"
         }
 
@@ -99,7 +99,7 @@ export const Validators = {
             errors.price = "Invalid price, make sure to use digits only"
         }
         
-        if(!DbActions.registerBarber(values)) {
+        if(!Object.keys(errors).length && !DbActions.registerBarber(values)) {
             errors.alreadyExists = "Barber with current email already exists"
         }
        
