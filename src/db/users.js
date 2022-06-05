@@ -1,8 +1,8 @@
 const barberUsers = [
     {
         id: 1,
-        firstName: 'Kate',
-        lastName: 'Doe',
+        firstName: 'Katie',
+        lastName: 'Black',
         email: 'kate@testmail.com',
         address: 'florida',
         price: '100',
@@ -19,9 +19,61 @@ const barberUsers = [
                 description: 'survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum'
             },
             {
+                id: 3,
+                rate: 3,
+                description: 'survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum'
+            }
+        ]
+    },
+    {
+        id: 2,
+        firstName: 'Jonny',
+        lastName: 'Doe',
+        email: 'jonny@example.com',
+        address: 'Tbilisi',
+        price: '500',
+
+        userRates: [
+            {
                 id: 1,
                 rate: 3,
                 description: 'survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum'
+            },
+        ]
+    },
+    {
+        id: 3,
+        firstName: 'Mike',
+        lastName: 'Brown',
+        email: 'mike@testmail.com',
+        address: 'Georgia',
+        price: '1500',
+
+        userRates: [
+            {
+                id: 1,
+                rate: 3,
+                description: 'survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum'
+            },
+            {
+                id: 2,
+                rate: 1,
+                description: 'survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum'
+            },
+            {
+                id: 3,
+                rate: 5,
+                description: 'survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum'
+            },
+            {
+                id: 4,
+                rate: 5,
+                description: 'Very nice'
+            },
+            {
+                id: 5,
+                rate: 5,
+                description: 'Super'
             }
         ]
     }
@@ -39,15 +91,19 @@ const clientUsers = [
 /* Client actions */
 export const registerBarber = (newUser) => {
     const { firstName, lastName, email, address, price } = newUser;
-    const authentificatedUser = clientUsers.find(o => o.email === email);
+    const authentificatedUser = barberUsers.find(o => o.email === email);
 
     if(!authentificatedUser && firstName && lastName && address && price && email) {
+        const uId = Date.now();
+
         barberUsers.push({
+            id: uId,
             firstName,
             lastName,
             email,
             address,
-            price
+            price,
+            userRates: []
         })
         
         return true;
@@ -64,6 +120,7 @@ export const registerClient = (newUser) => {
         clientUsers.push({
             email,
             password,
+            orderedBarberIds: []
         })
         
         return true;
@@ -119,7 +176,9 @@ export const addBarberRate = (id, {rate, description}) => {
     const barber = barberUsers.find(o => o.id == id)
 
     if(barber) {
-        barber.userRates.push({rate, description})
+        const uId = Date.now();
+
+        barber.userRates.push({id: uId, rate, description})
         return true;
     }
 
