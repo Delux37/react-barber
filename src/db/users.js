@@ -5,7 +5,9 @@ const barberUsers = [
         lastName: 'Doe',
         email: 'kate@testmail.com',
         address: 'florida',
-        price: '100'
+        price: '100',
+
+        userRates: []
     }
 ]
 
@@ -71,4 +73,16 @@ export const fetchBarberDetail = (id) => {
     }
 
     return null;
+}
+
+export const addBarberRate = (id, {rate, description}) => {
+    const barber = barberUsers.find(o => o.id == id)
+
+    if(barber) {
+        barber.userRates.push({rate, description})
+        return true;
+    }
+
+
+    return null
 }

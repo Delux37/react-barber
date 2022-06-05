@@ -6,9 +6,35 @@ import * as DbActions from "../../db/users";
 
 
 function BarberDetail() {
+  const rate = {
+      minRate: 0,
+      maxRate: 5
+  };
+  const initialValues = { 
+      rate: 1,
+      description: ''
+  }
   const {id} = useParams();
   const navigate = useNavigate();
   const [barber, setBarber] = useState({})
+  const [formValues, setFormValues] = useState(initialValues)
+
+  const handleChange = (e) => {
+      const { name, value } = e.target
+      setFormValues({...formValues, [name]: value});
+  }
+
+  const handleSubmit = (e) => {
+      const {rate, description} = formValues;
+      e.preventDefault();
+      const val = DbActions.addBarberRate(barber.id, { rate, description })
+      if(val) {
+          navigate('/dashboard');
+          setFormValues(initialValues);
+      }
+
+      // handle errror
+  }
 
   useEffect(() => {
     try {
@@ -52,10 +78,10 @@ function BarberDetail() {
             </li>
           </ul>
         </div>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="group">
             <label htmlFor="customRange2" className="form-label">
-              Choose rate
+              Choose rate {formValues.rate} / {rate.maxRate}
             </label>
             <input
               type="range"
@@ -67,8 +93,11 @@ function BarberDetail() {
                         bg-transparent
                         focus:outline-none focus:ring-0 focus:shadow-none
                         "
-              min="0"
-              max="5"
+              name="rate" 
+              value={formValues.rate}
+              min={rate.minrate}
+              max={rate.maxRate}
+              onChange={handleChange}
               id="customRange2"
             />
           </div>
@@ -98,6 +127,9 @@ function BarberDetail() {
                 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
             "
               id="exampleFormControlTextarea1"
+              name="description"
+              onChange={handleChange}
+              value={formValues.description}
               rows="3"
               placeholder="Your message"
             ></textarea>
