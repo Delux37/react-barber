@@ -29,7 +29,7 @@ function BarberList() {
                 firstName={barber.firstName}
                 lastName={barber.lastName}
                 price={barber.price}
-                averageRate={barber.rate}
+                userRates={barber.userRates}
               />
           </div>
         )
