@@ -1,11 +1,15 @@
 import logo from "../../styles/images/barber-icon.png";
 import { useNavigate } from "react-router-dom";
 
-function Toolbar({ email }) {
+function Toolbar({ email, signOut }) {
   const navigate = useNavigate();
 
   const handleClick = () => {
       navigate('/dashboard', { replace: true })
+  }
+
+  const handleSignOut = () => {
+    signOut();
   }
 
   return (
@@ -23,6 +27,7 @@ function Toolbar({ email }) {
           <a
             href="#"
             className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0"
+            onClick={handleSignOut}
           >
             Sign out
           </a>

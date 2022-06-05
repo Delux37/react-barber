@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import * as DbActions from "../../db/users";
 
-function BarberDetail({ email }) {
+function BarberDetail({ email, signOut }) {
   const rate = {
     minRate: 0,
     maxRate: 5,
@@ -60,7 +60,7 @@ function BarberDetail({ email }) {
 
   return (
     <div className="flex flex-col h-screen w-screen	overflow-y-scroll  bg-catalog-bground">
-      <Toolbar email="mymail@gmail.com" />
+      <Toolbar email={email} signOut={signOut}/>
       <div className="flex gap-20 p-5 flex-center items-start bg-white mx-auto my-10 rounded max-w-4xl">
         <div className="w-auto w-fit txt-sm font-bold text-gray-600 block">
           <p>Here you can view {barber.firstName}'s detail</p>

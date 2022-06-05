@@ -1,10 +1,10 @@
 import Toolbar from './shared/Toolbar'
 import BarberList from './catalog/BarbersList';
 
-function Dashboard() {
+function Dashboard({email, signOut}) {
     return (
         <div className="flex flex-col h-screen w-screen	overflow-hidden">
-            <Toolbar email={'testmail@test.com'}/>
+            <Toolbar email={email} signOut={signOut}/>
     
             <BarberList />
         </div>
