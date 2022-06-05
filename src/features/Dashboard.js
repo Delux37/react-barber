@@ -1,6 +1,10 @@
+import Toolbar from './shared/Toolbar'
+
 function Dashboard() {
 
-    return <div>Dashboard works</div>
+    return (
+        <Toolbar />
+    )
 }
 
 export default Dashboard
