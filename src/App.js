@@ -13,7 +13,10 @@ import './App.css';
 import Dashboard from "./features/Dashboard";
 
 function App() {
-  const [activeUser, setActiveUser] = useState(null);
+  const [activeUser, setActiveUser] = useState(    {
+    email: 'john.doe@test.com',
+    password: '12345678'
+});
 
   const addActiveUser = (user) => {
     setActiveUser(user);
@@ -21,7 +24,7 @@ function App() {
 
   return (
     <BrowserRouter>
-        <div className="containerCustom">
+        
           <Routes>
               <Route path='*' element={<Navigate to="/auth/login"/>} />
               <Route path="dashboard" element={
@@ -31,21 +34,26 @@ function App() {
               }></Route>
               <Route path="auth/login" element={
                   <UnauthorizedRoutes user={activeUser}>
-                    <Login  addActiveUser={addActiveUser}/>
+                    <div className="containerCustom">
+                      <Login  addActiveUser={addActiveUser}/>
+                    </div>
                   </UnauthorizedRoutes> }
                />
               <Route path="auth/signup" element={
                 <UnauthorizedRoutes user={activeUser}>
-                  <SignupClient addActiveUser={addActiveUser}/>
+                  <div className="containerCustom">
+                    <SignupClient addActiveUser={addActiveUser}/>
+                  </div>
                 </UnauthorizedRoutes>
               } />
               <Route path="auth/signup-barber" element={
                 <UnauthorizedRoutes user={activeUser}>
-                  <SignupBarber />
+                  <div className="containerCustom">
+                    <SignupBarber />
+                  </div>
                 </UnauthorizedRoutes>
               } />
           </Routes>
-        </div>
     </BrowserRouter>
   )
 }
