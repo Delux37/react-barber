@@ -1,5 +1,6 @@
 const barberUsers = [
     {
+        id: 1,
         firstName: 'Kate',
         lastName: 'Doe',
         email: 'kate@testmail.com',
@@ -60,4 +61,14 @@ export const loginUser = (user) => {
     }
 
     return false;
+}
+
+export const fetchBarberDetail = (id) => {
+    const barber = barberUsers.find(o => o.id == id)
+
+    if(barber) {
+        return { ...barber }
+    }
+
+    return null;
 }

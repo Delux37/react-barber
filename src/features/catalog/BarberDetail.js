@@ -1,18 +1,46 @@
 import Toolbar from "../shared/Toolbar";
+import { useParams, useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react';
+import * as DbActions from "../../db/users";
+
+
 
 function BarberDetail() {
+  const {id} = useParams();
+  const navigate = useNavigate();
+  const [barber, setBarber] = useState({})
+
+  useEffect(() => {
+    try {
+        const parsed = parseInt(id);
+        if(isNaN(parsed) || typeof parsed !== 'number')
+            throw new Error('Invalid param');
+
+        const dbBarber = DbActions.fetchBarberDetail(id);
+        
+        if(!dbBarber)
+            throw new Error('Invalid param');
+            
+        setBarber(dbBarber);
+
+    } catch {
+        navigate("/dashboard")
+    }
+
+
+  }, [])
+
   return (
-    <div className="flex flex-col h-screen w-screen	overflow-y-scroll">
+    <div className="flex flex-col h-screen w-screen	overflow-y-scroll  bg-catalog-bground">
       <Toolbar email="mymail@gmail.com" />
-
-      <div className="flex gap-20 p-5 flex-center items-start">
+      <div className="flex gap-20 p-5 flex-center items-start bg-white mx-auto my-10 rounded">
         <div className="w-auto w-fit txt-sm font-bold text-gray-600 block">
-          <p>Here you can view George's detail</p>
+          <p>Here you can view {barber.firstName}'s detail</p>
 
-          <p>Lastname: doe</p>
-          <p>Conact: john@gmail.com</p>
-          <p>Address: Georgia</p>
-          <p>Price: 100$</p>
+          <p>Lastname: {barber.lastName}</p>
+          <p>Conact: {barber.email}</p>
+          <p>Address: {barber.address}</p>
+          <p>Price: {barber.price}$</p>
           <button className=" w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 rounded text-white text-sm">
             Order
           </button>
@@ -26,12 +54,12 @@ function BarberDetail() {
         </div>
         <form>
           <div className="group">
-            <label for="customRange2" class="form-label">
+            <label htmlFor="customRange2" className="form-label">
               Choose rate
             </label>
             <input
               type="range"
-              class="
+              className="
                         form-range
                         w-full
                         h-6
@@ -46,13 +74,13 @@ function BarberDetail() {
           </div>
           <div className="group">
             <label
-              for="exampleFormControlTextarea1"
-              class="form-label inline-block mb-2 text-gray-700"
+              htmlFor="exampleFormControlTextarea1"
+              className="form-label inline-block mb-2 text-gray-700"
             >
               Example textarea
             </label>
             <textarea
-              class="
+              className="
                 form-control
                 block
                 w-full
